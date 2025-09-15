@@ -1,0 +1,223 @@
+:root{
+  --header-height: 80px;
+  --container-max: 1200px;
+  --border-color: #000;
+  --header-bg: #7a4f2e; /* café */
+  --gap: 1rem;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html,body{ height:100%; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+
+/* 5mm de espacio a izquierda y derecha dentro del cuerpo */
+.container{
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 5mm; /* pedido: 5 milimetros */
+  width: 100%;
+}
+
+/* Header fijo (estático en la parte superior al hacer scroll) */
+.site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: var(--header-bg);
+  color: white;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Ajuste para que el contenido no quede debajo del header fijo */
+.main-offset{
+  padding-top: calc(var(--header-height) + 1rem);
+}
+
+/* Header interno: distribución en tres zonas: left (brand), center (nav), right (pdf) */
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: var(--gap);
+  width:100%;
+}
+
+/* BRAND (JSGS DW y LogoDW) - dentro de rectángulo redondeado borde negro */
+.brand-box{
+  display:flex;
+  align-items:center;
+  gap: 8px; /* espacio mínimo entre título e imagen */
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 6px 10px;
+  background: transparent;
+  color: white;
+  min-width: 220px;
+  /* Alinear a la izquierda con los artículos (la .container mantiene el mismo ancho) */
+}
+
+/* Título dentro de brand */
+.brand-box h1{
+  font-size: 1.25rem;
+  margin-right: 6px;
+  line-height:1;
+}
+
+/* LogoDW dentro del brand */
+.brand-box img{
+  width: 42px;
+  height: auto;
+  display:block;
+}
+
+/* NAV centrado: rectángulo redondeado borde negro */
+.nav-box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 6px 14px;
+  gap: 12px;
+  flex: 1 1 400px; /* ocupa el espacio disponible de forma uniforme */
+  max-width: 700px;
+}
+
+/* Lista de nav */
+.nav-box ul{
+  list-style:none;
+  display:flex;
+  gap: 18px;
+  align-items:center;
+  justify-content:center;
+  padding: 0;
+  margin: 0;
+}
+.nav-box a{
+  color: #fff;
+  text-decoration:none;
+  font-weight:600;
+  padding:6px 8px;
+  border-radius:6px;
+}
+
+/* nav items separados visualmente (puedes ajustar hover) */
+.nav-box a:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+/* PDF: rectángulo redondeado borde negro a la derecha */
+.pdf-box{
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select:none;
+  min-width:72px;
+  text-align:center;
+  background: transparent;
+  color: white;
+  font-weight:700;
+}
+
+/* Estética general del main */
+main{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+/* artículos */
+article{
+  background: white;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Cabecera de cada artículo: fondo oscuro para que el título blanco tenga contraste */
+.article-header{
+  background: #222;
+  color: #fff;
+  padding: 12px 16px;
+}
+.article-header h2{
+  font-size: 1.1rem;
+  color: #fff; /* pedido: títulos blancos */
+  margin-bottom: 6px;
+}
+.article-meta{
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+/* Imagen del artículo */
+article img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  display:block;
+}
+
+/* Contenido del artículo */
+.article-body{
+  padding: 16px;
+  color: #222;
+  line-height:1.6;
+}
+
+/* Aside (barra lateral) */
+aside{
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+/* Footer */
+footer{
+  background:#222;
+  color:#fff;
+  padding: 24px 0;
+  margin-top: 20px;
+}
+.footer-inner{
+  display:flex;
+  gap: 20px;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+.footer-inner .copy{ max-width:60%; }
+.footer-contact{
+  border-radius:8px;
+  padding:12px;
+  min-width:260px;
+}
+
+/* Contactanos en footer con flecha hacia abajo y mensaje */
+.contactanos{
+  background: transparent;
+  padding: 12px;
+  border-radius:8px;
+  color: #fff;
+}
+.contactanos p{ margin-top:8px; }
+
+/* Responsividad básica */
+@media (max-width:900px){
+  main{ grid-template-columns: 1fr; }
+  .nav-box{ order:3; width:100%; margin-top:8px; }
+  .brand-box{ min-width:160px; }
+  .header-row{ flex-wrap:wrap; gap:10px; }
+  .pdf-box{ order:2; }
+}
+
+/* separación uniforme entre elementos dentro de container (para "ocupar todo el espacio disponible de manera uniforme") */
+.container > * + *{ margin-top: 1rem; }
